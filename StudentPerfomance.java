@@ -84,7 +84,8 @@ public class StudentPerfomance {
                 break;
             }//end of switch   
         }
-    }    public static ArrayList<Student> readStudentData(String filename) {
+    }
+    public static ArrayList<Student> readStudentData(String filename) {
     ArrayList<Student> studentList = new ArrayList<>();
 
     try (Scanner scanner = new Scanner(new File(filename))) {
@@ -117,6 +118,7 @@ public class StudentPerfomance {
 
     return studentList;
 }
+    
     //Functional Requirement 2: Print Student data and calculated total marks of student
     public static void calculateTotalMarksAndDisplay(ArrayList<Student> studentList) {
     for (Student student : studentList) {
@@ -130,6 +132,7 @@ public class StudentPerfomance {
                 ", Total Mark: " + totalMarks);
     }
 }
+    
     //Functional Requirement 3:  Displays the list of students with total marks less than a certain threshold
     public static void printStudentsBelowThreshold(ArrayList<Student> studentList, double threshold) {
     studentList.stream()
@@ -154,8 +157,6 @@ public class StudentPerfomance {
                                  .sum();
         student.setTotalMarks(totalMarks);
     });
-    
-
 
     // Find top 5 students with highest total marks
     System.out.println("Top 5 Students (Highest Total Marks):");
@@ -199,7 +200,62 @@ public class StudentPerfomance {
                            ", Total Mark: " + totalMarks);
 
         studentList.remove(bottomStudent); 
+    }
 }
+    
+}
+class Student {
+    // Student class to store student information
+    private String unitName;
+    private String studentID;
+    private String name;
+    private double[] marks;
+    private double totalMarks;
+    
+    
 
-}
+    public Student(String unitName, String studentID, String name, double[] marks) {
+        this.unitName = unitName;
+        this.studentID = studentID;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double[] getMarks() {
+        return marks;
+    }
+    
+    //New Method to calculate and return total marks for F5
+    public double calculateTotalMarks() {
+        double total = 0;
+        for (double mark : marks) {
+            if (mark != -1.0) {
+                total += mark;
+            }
+        }
+        return total;
+    }
+    
+    // New method to set the total marks for F5
+    public void setTotalMarks(double totalMarks) {
+        this.totalMarks = totalMarks;
+    }
+
+    // New method to get the total marks for F5
+    public double getTotalMarks() {
+        return totalMarks;
+    }
+
 }
