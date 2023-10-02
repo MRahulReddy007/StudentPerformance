@@ -117,4 +117,18 @@ public class StudentPerfomance {
 
     return studentList;
 }
+    //Functional Requirement 2: Print Student data and calculated total marks of student
+    public static void calculateTotalMarksAndDisplay(ArrayList<Student> studentList) {
+    for (Student student : studentList) {
+        double totalMarks = Arrays.stream(student.getMarks())
+                                  .filter(mark -> mark != -1.0)
+                                  .sum();
+
+        System.out.println("Name: " + student.getName() +
+                ", Student ID: " + student.getStudentID() +
+                ", Marks: " + Arrays.toString(student.getMarks()) +
+                ", Total Mark: " + totalMarks);
+    }
+}
+
 }
