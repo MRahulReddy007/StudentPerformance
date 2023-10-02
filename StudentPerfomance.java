@@ -130,5 +130,31 @@ public class StudentPerfomance {
                 ", Total Mark: " + totalMarks);
     }
 }
+    //Functional Requirement 3:  Displays the list of students with total marks less than a certain threshold
+    public static void printStudentsBelowThreshold(ArrayList<Student> studentList, double threshold) {
+    studentList.stream()
+               .filter(student -> Arrays.stream(student.getMarks())
+                                       .filter(mark -> mark != -1.0)
+                                       .sum() < threshold)
+               .forEach(student -> System.out.println("Name: " + student.getName() +
+                                                      ", Student ID: " + student.getStudentID() +
+                                                      ", Marks: " + Arrays.toString(student.getMarks()) +
+                                                      ", Total Mark: " + Arrays.stream(student.getMarks())
+                                                                              .filter(mark -> mark != -1.0)
+                                                                              .sum()));
+}
 
+
+    //Functional Requirement 4: Displaying to 5 Students with highest and lowest marks
+        public static void printTopAndBottomStudents(ArrayList<Student> studentList) {
+    // Calculate total marks for each student
+    studentList.forEach(student -> {
+        double totalMarks = Arrays.stream(student.getMarks())
+                                 .filter(mark -> mark != -1.0)
+                                 .sum();
+        student.setTotalMarks(totalMarks);
+    });
+    
+
+}
 }
