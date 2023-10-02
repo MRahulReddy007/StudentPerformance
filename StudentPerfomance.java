@@ -156,5 +156,50 @@ public class StudentPerfomance {
     });
     
 
+
+    // Find top 5 students with highest total marks
+    System.out.println("Top 5 Students (Highest Total Marks):");
+    for (int i = 0; i < Math.min(5, studentList.size()); i++) {
+        Student topStudent = studentList.get(0);
+        double maxTotalMarks = topStudent.getTotalMarks();
+
+        for (Student student : studentList) {
+            if (student.getTotalMarks() > maxTotalMarks) {
+                maxTotalMarks = student.getTotalMarks();
+                topStudent = student;
+            }
+        }
+
+        double totalMarks = topStudent.getTotalMarks();
+        System.out.println("Name: " + topStudent.getName() +
+                           ", Student ID: " + topStudent.getStudentID() +
+                           ", Marks: " + Arrays.toString(topStudent.getMarks()) +
+                           ", Total Mark: " + totalMarks);
+
+        studentList.remove(topStudent); // Remove the student with the highest total marks
+    }
+
+    // Find bottom 5 students with lowest total marks
+    System.out.println("\nTop 5 Students (Lowest Total Marks):");
+    for (int i = 0; i < Math.min(5, studentList.size()); i++) {
+        Student bottomStudent = studentList.get(0);
+        double minTotalMarks = bottomStudent.getTotalMarks();
+
+        for (Student student : studentList) {
+            if (student.getTotalMarks() < minTotalMarks) {
+                minTotalMarks = student.getTotalMarks();
+                bottomStudent = student;
+            }
+        }
+
+        double totalMarks = bottomStudent.getTotalMarks();
+        System.out.println("Name: " + bottomStudent.getName() +
+                           ", Student ID: " + bottomStudent.getStudentID() +
+                           ", Marks: " + Arrays.toString(bottomStudent.getMarks()) +
+                           ", Total Mark: " + totalMarks);
+
+        studentList.remove(bottomStudent); 
+}
+
 }
 }
