@@ -84,5 +84,37 @@ public class StudentPerfomance {
                 break;
             }//end of switch   
         }
+    }    public static ArrayList<Student> readStudentData(String filename) {
+    ArrayList<Student> studentList = new ArrayList<>();
+
+    try (Scanner scanner = new Scanner(new File(filename))) {
+        if (scanner.hasNextLine()) {
+            String unitName = scanner.nextLine().trim();
+            scanner.nextLine();  // Skip header line
+
+            while (scanner.hasNextLine()) {
+                String[] parts = scanner.nextLine().split(",");
+                String lastName = parts[0].trim();
+                String firstName = parts[1].trim();
+                String studentID = parts[2].trim();
+
+                double[] marks = new double[3];
+                for (int i = 0; i < 3; i++) {
+                    marks[i] = (i + 3 < parts.length && !parts[i + 3].trim().isEmpty()) ?
+                                Double.parseDouble(parts[i + 3].trim()) : -1.0;
+                }
+
+                studentList.add(new Student(unitName, studentID, lastName + ", " + firstName, marks));
+            }
+
+            System.out.println("File found. Reading data from " + filename + "... Successful");
+        } else {
+            System.out.println("Empty file: " + filename);
+        }
+    } catch (FileNotFoundException e) {
+        System.err.println("File not found: " + filename);
     }
+
+    return studentList;
+}
 }
